@@ -1,0 +1,1 @@
+java -jar Slniecko.jar 5 http://icons.iconarchive.com/icons/franksouza183/fs/64/Apps-pidgin-icon.png
