@@ -2,14 +2,13 @@ package slniecko;
 
 import java.awt.Graphics2D;
 
-public interface IObject
-{
+public interface IObject {
 
-    public abstract void pohniSa();
+    public abstract void move();
 
-    public abstract void nakresliSa(Graphics2D paramGraphics2D);
+    public abstract void draw(Graphics2D paramGraphics2D);
 
-    public abstract boolean zasah(int x, int y);
+    public abstract boolean hit(int x, int y);
 
-    public abstract int dajBody();
+    public abstract int giveBody();
 }

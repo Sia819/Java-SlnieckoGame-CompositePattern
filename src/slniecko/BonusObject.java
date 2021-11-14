@@ -12,25 +12,25 @@ import java.io.IOException;
  *
  * @author Unlink
  */
-public class BonusObject extends ZakladnyObjekt {
+public class BonusObject extends BasicGameObject {
 
     private boolean zobrazeny;
     private int counter;
-    
+
     public BonusObject(int sirkaIhriska, int vyskaIhriska) throws IOException {
-        super(sirkaIhriska, vyskaIhriska, new Obrazok("/slniecko/1363725493_heart.png", 20, 20));
+        super(sirkaIhriska, vyskaIhriska, new GameObjectImage("/slniecko/1363725493_heart.png", 20, 20));
         this.zobrazeny = false;
         this.counter = 0;
     }
 
     @Override
-    public int dajBody() {
+    public int giveBody() {
         return 5;
     }
 
     @Override
-    public boolean zasah(int x, int y) {
-        boolean zasah = this.zobrazeny && super.zasah(x, y);
+    public boolean hit(int x, int y) {
+        boolean zasah = this.zobrazeny && super.hit(x, y);
         if (zasah) {
             this.zobrazeny = false;
             this.counter = 0;
@@ -39,16 +39,16 @@ public class BonusObject extends ZakladnyObjekt {
     }
 
     @Override
-    public void nakresliSa(Graphics2D g2) {
+    public void draw(Graphics2D g2) {
         if (this.zobrazeny) {
-            super.nakresliSa(g2);
+            super.draw(g2);
         }
     }
 
     @Override
-    public void pohniSa() {
+    public void move() {
         this.counter++;
-        //Prvých 10s je off, potom on
+        //Prv첵ch 10s je off, potom on
         if (this.counter > 50 * 10) {
             this.zobrazeny = true;
         }
@@ -58,10 +58,10 @@ public class BonusObject extends ZakladnyObjekt {
             this.counter = 0;
         }
         if (this.zobrazeny) {
-            super.pohniSa();
+            super.move();
         }
     }
-    
-    
-    
+
+
+
 }

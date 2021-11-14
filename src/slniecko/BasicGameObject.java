@@ -3,67 +3,68 @@ package slniecko;
 import java.awt.Graphics2D;
 import java.util.Random;
 
-public class BasicGameObject implements IObjekt {
+public class BasicGameObject implements IObject {
 
     private int x;
     private int y;
     private int deltaX;
     private int deltaY;
-    private final int sirkaIhriska;
-    private final int vyskaIhriska;
-    private final Obrazok obrazok;
+    private final int areaWidth;
+    private final int areaHeight;
+    private final GameObjectImage image;
 
     /**
-     * @param sirkaIhriska
-     * @param vyskaIhriska
-     * @param obrazok
+     * @param areaWidth
+     * @param areaHeight
+     * @param image
      */
-    public BasicGameObject(int sirkaIhriska, int vyskaIhriska, Obrazok obrazok) {
-        this.sirkaIhriska = sirkaIhriska;
-        this.vyskaIhriska = vyskaIhriska;
-        this.obrazok = obrazok;
-        this.reset();
+    public BasicGameObject(int areaWidth, int areaHeight, GameObjectImage image) {
+        this.areaWidth = areaWidth;
+        this.areaHeight = areaHeight;
+        this.image = image;
+        this.resetLocation();
     }
 
     @Override
-    public void pohniSa() {
+    public void move() {
         this.x += this.deltaX;
         this.y += this.deltaY;
-        if ((this.x < 0) || (this.x + this.obrazok.getSirka() > this.sirkaIhriska)) {
+        if ((this.x < 0) || (this.x + this.image.getWidth() > this.areaWidth)) {
             this.deltaX = (-this.deltaX);
             this.x += this.deltaX;
         }
-        if ((this.y < 0) || (this.y + this.obrazok.getVyska() > this.vyskaIhriska)) {
+        if ((this.y < 0) || (this.y + this.image.getHeight() > this.areaHeight)) {
             this.deltaY = (-this.deltaY);
             this.y += this.deltaY;
         }
     }
 
     @Override
-    public void nakresliSa(Graphics2D g2) {
-        this.obrazok.vykresli(g2, x, y);
+    public void draw(Graphics2D g2) {
+        this.image.draw(g2, x, y);
     }
 
     @Override
-    public boolean zasah(int x, int y) {
-        boolean zasah = (x >= this.x) && (x <= this.x + this.obrazok.getSirka()) && (y >= this.y) && (y <= this.y + this.obrazok.getVyska());
+    public boolean hit(int x, int y) {
+        boolean zasah = (x >= this.x) && (x <= this.x + this.image.getWidth())
+                && (y >= this.y) && (y <= this.y + this.image.getHeight());
         if (zasah) {
-            reset();
+            resetLocation();
         }
         return zasah;
     }
 
-    private void reset() {
+    private void resetLocation() {
         Random rand = new Random();
-        this.x = rand.nextInt(this.sirkaIhriska - this.obrazok.getSirka());
-        this.y = rand.nextInt(this.vyskaIhriska - this.obrazok.getVyska());
+        this.x = rand.nextInt(this.areaWidth - this.image.getWidth());
+        this.y = rand.nextInt(this.areaHeight - this.image.getHeight());
 
         this.deltaX = (rand.nextInt(11) - 5);
         this.deltaY = (rand.nextInt(11) - 5);
     }
 
     @Override
-    public int dajBody() {
+    public int giveBody() {
         return 1;
     }
 }

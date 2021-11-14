@@ -4,57 +4,59 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GameObjectContainer implements IObjekt {
+public class GameObjectContainer implements IObject {
 
-    private ArrayList<IObjekt> objekty;
+    private ArrayList<IObject> gameObject;
     private int body;
 
     public GameObjectContainer() {
         this.body = 0;
-        this.objekty = new ArrayList<>();
+        this.gameObject = new ArrayList<>();
     }
 
-    public GameObjectContainer(Hra hra, int sirka, int vyska) throws IOException {
+    public GameObjectContainer(Game hra, int sirka, int vyska) throws IOException {
         this();
-        Obrazok obrazok = new Obrazok(hra.getObrazok() != null ? hra.getObrazok() : "/slniecko/1363649436_gadu.png");
-        for (int i = 0; i < hra.getPocetObjektov(); i++) {
-            this.pridajObjekt(new ZakladnyObjekt(sirka, vyska, obrazok));
+        GameObjectImage image = new GameObjectImage(
+                hra.getImagePath() != null
+                        ? hra.getImagePath() : "/slniecko/1363649436_gadu.png");
+        for (int i = 0; i < hra.getObjectCount(); i++) {
+            this.addObject(new BasicGameObject(sirka, vyska, image));
         }
     }
-    
-    public void pridajObjekt(IObjekt objekt) {
-        this.objekty.add(objekt);
+
+    public void addObject(IObject objekt) {
+        this.gameObject.add(objekt);
     }
 
     @Override
-    public void pohniSa() {
+    public void move() {
         this.body = 0;
-        for (IObjekt o : this.objekty) {
-            o.pohniSa();
+        for (IObject o : this.gameObject) {
+            o.move();
         }
     }
 
     @Override
-    public void nakresliSa(Graphics2D g2) {
-        for (IObjekt o : this.objekty) {
-            o.nakresliSa(g2);
+    public void draw(Graphics2D g2) {
+        for (IObject o : this.gameObject) {
+            o.draw(g2);
         }
     }
 
     @Override
-    public boolean zasah(int x, int y) {
-        boolean zasah = false;
-        for (IObjekt o : this.objekty) {
-            if (o.zasah(x, y)) {
+    public boolean hit(int x, int y) {
+        boolean isHited = false;
+        for (IObject o : this.gameObject) {
+            if (o.hit(x, y)) {
                 this.body += 1;
-                zasah = true;
+                isHited = true;
             }
         }
-        return zasah;
+        return isHited;
     }
 
     @Override
-    public int dajBody() {
+    public int giveBody() {
         return body > 0 ? body : 1;
     }
 }

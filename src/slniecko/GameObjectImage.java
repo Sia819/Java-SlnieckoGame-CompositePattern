@@ -5,6 +5,7 @@
  */
 package slniecko;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
@@ -16,45 +17,44 @@ import javax.imageio.ImageIO;
  *
  * @author Unlink
  */
-public class GameObjectImage
-{
-    
+public class GameObjectImage {
+
     private BufferedImage bitmap;
 
-    public GameObjectImage(String adresa) throws IOException {
+    public GameObjectImage(String imagePath) throws IOException {
         try {
-            if (adresa.startsWith("/")) {
-                this.bitmap = ImageIO.read(getClass().getResource(adresa));
+            if (imagePath.startsWith("/")) {
+                this.bitmap = ImageIO.read(getClass().getResource(imagePath));
             }
             else {
-                this.bitmap = ImageIO.read(new URL(adresa));
+                this.bitmap = ImageIO.read(new URL(imagePath));
             }
         }
         catch (Exception exception) {
-            throw new IOException("Nepodarilo na nacitat obrazok", exception);
+            throw new IOException("Cannot Image Loaded!", exception);
         }
     }
-    
-    public GameObjectImage(String adresa, int sirka, int vyska) throws IOException {
-        this(adresa);
-        BufferedImage dimg = new BufferedImage(sirka, vyska, this.bitmap.getType());  
-        Graphics2D g = dimg.createGraphics();  
+
+    public GameObjectImage(String imagePath, int width, int height) throws IOException {
+        this(imagePath);
+        BufferedImage dimg = new BufferedImage(width, height, this.bitmap.getType());
+        Graphics2D g = dimg.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-        RenderingHints.VALUE_INTERPOLATION_BILINEAR);  
-        g.drawImage(this.bitmap, 0, 0, sirka, vyska, 0, 0, this.bitmap.getWidth(), this.bitmap.getHeight(), null);  
-        g.dispose();  
+                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.drawImage(this.bitmap, 0, 0, width, height, 0, 0, this.bitmap.getWidth(), this.bitmap.getHeight(), null);
+        g.dispose();
         this.bitmap = dimg;
     }
-    
-    public void vykresli(Graphics2D g2, int x, int y) {
+
+    public void draw(Graphics2D g2, int x, int y) {
         g2.drawImage(this.bitmap, null, x, y);
     }
-    
-    public int getSirka() {
+
+    public int getWidth() {
         return this.bitmap.getWidth();
     }
-    
-    public int getVyska() {
+
+    public int getHeight() {
         return this.bitmap.getHeight();
     }
 }

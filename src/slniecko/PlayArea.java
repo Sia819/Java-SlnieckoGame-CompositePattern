@@ -16,16 +16,16 @@ import javax.swing.JComponent;
 
 public class PlayArea extends JComponent implements ActionListener {
 
-    private int sirka;
-    private int vyska;
-    private final Hra hra;
+    private int width;
+    private int height;
+    private final Game game;
     private InputHandler input;
-    private IObjekt objekt;
+    private IObject gameObject;
 
-    public PlayArea(Hra hra, int sirka, int vyska) throws IOException {
-        this.hra = hra;
-        this.sirka = sirka;
-        this.vyska = vyska;
+    public PlayArea(Game hra, int sirka, int vyska) throws IOException {
+        this.game = hra;
+        this.width = sirka;
+        this.height = vyska;
 
         this.input = new InputHandler(hra);
 
@@ -34,13 +34,13 @@ public class PlayArea extends JComponent implements ActionListener {
         hra.addWindowListener(input);
         hra.addWindowFocusListener(input);
 
-        ObjektContainer kontajner = new ObjektContainer();
-        kontajner.pridajObjekt(new ObjektContainer(hra, sirka, vyska));
-        kontajner.pridajObjekt(new BonusovyObjekt(sirka, vyska));
-        this.objekt = kontajner;
-        
-        this.setPreferredSize(new Dimension(this.sirka, this.vyska));
-        this.setMinimumSize(new Dimension(this.sirka, this.vyska));
+        GameObjectContainer gameContainer = new GameObjectContainer();
+        gameContainer.addObject(new GameObjectContainer(hra, sirka, vyska));
+        gameContainer.addObject(new BonusObject(sirka, vyska));
+        this.gameObject = gameContainer;
+
+        this.setPreferredSize(new Dimension(this.width, this.height));
+        this.setMinimumSize(new Dimension(this.width, this.height));
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image = toolkit.getImage(getClass().getResource("/slniecko/1363733258_target.png"));
@@ -55,35 +55,35 @@ public class PlayArea extends JComponent implements ActionListener {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         this.generateBackground(g2);
-        this.objekt.nakresliSa(g2);
+        this.gameObject.draw(g2);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (this.input.isClickAction()) {
             int[] suradnice = this.input.dajClick();
-            if (this.objekt.zasah(suradnice[0], suradnice[1])) {
-                System.out.println("Objekt zasiahnutý");
-                this.hra.editScore(this.objekt.dajBody());
+            if (this.gameObject.hit(suradnice[0], suradnice[1])) {
+                System.out.println("Objekt zasiahnut첵");
+                this.game.editScore(this.gameObject.giveBody());
             } else {
-                this.hra.editScore(-1);
+                this.game.editScore(-1);
             }
         }
-        this.objekt.pohniSa();
+        this.gameObject.move();
         this.repaint();
     }
 
     private void generateBackground(Graphics2D g2) {
         g2.setColor(new Color(5245641));
-        g2.fillRect(0, 0, this.sirka, this.vyska);
+        g2.fillRect(0, 0, this.width, this.height);
 
         g2.setColor(Color.gray);
-        for (int i = 20; i < this.sirka; i += 20) {
-            g2.drawLine(i, 0, i, this.vyska);
+        for (int i = 20; i < this.width; i += 20) {
+            g2.drawLine(i, 0, i, this.height);
         }
 
-        for (int i = 20; i < this.vyska; i += 20) {
-            g2.drawLine(0, i, this.sirka, i);
+        for (int i = 20; i < this.height; i += 20) {
+            g2.drawLine(0, i, this.width, i);
         }
     }
 }
