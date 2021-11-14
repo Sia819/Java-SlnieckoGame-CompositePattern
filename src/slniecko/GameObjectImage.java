@@ -5,7 +5,6 @@
  */
 package slniecko;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
@@ -17,11 +16,12 @@ import javax.imageio.ImageIO;
  *
  * @author Unlink
  */
-public class Obrazok {
+public class GameObjectImage
+{
     
     private BufferedImage bitmap;
 
-    public Obrazok(String adresa) throws IOException {
+    public GameObjectImage(String adresa) throws IOException {
         try {
             if (adresa.startsWith("/")) {
                 this.bitmap = ImageIO.read(getClass().getResource(adresa));
@@ -35,7 +35,7 @@ public class Obrazok {
         }
     }
     
-    public Obrazok(String adresa, int sirka, int vyska) throws IOException {
+    public GameObjectImage(String adresa, int sirka, int vyska) throws IOException {
         this(adresa);
         BufferedImage dimg = new BufferedImage(sirka, vyska, this.bitmap.getType());  
         Graphics2D g = dimg.createGraphics();  

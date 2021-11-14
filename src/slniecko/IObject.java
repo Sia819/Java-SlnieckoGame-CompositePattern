@@ -2,7 +2,8 @@ package slniecko;
 
 import java.awt.Graphics2D;
 
-public interface IObjekt {
+public interface IObject
+{
 
     public abstract void pohniSa();
 

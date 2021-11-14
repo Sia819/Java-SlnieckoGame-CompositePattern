@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.JComponent;
 
-public class HraciaPlocha extends JComponent implements ActionListener {
+public class PlayArea extends JComponent implements ActionListener {
 
     private int sirka;
     private int vyska;
@@ -22,7 +22,7 @@ public class HraciaPlocha extends JComponent implements ActionListener {
     private InputHandler input;
     private IObjekt objekt;
 
-    public HraciaPlocha(Hra hra, int sirka, int vyska) throws IOException {
+    public PlayArea(Hra hra, int sirka, int vyska) throws IOException {
         this.hra = hra;
         this.sirka = sirka;
         this.vyska = vyska;

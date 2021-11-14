@@ -12,12 +12,12 @@ import java.io.IOException;
  *
  * @author Unlink
  */
-public class BonusovyObjekt extends ZakladnyObjekt {
+public class BonusObject extends ZakladnyObjekt {
 
     private boolean zobrazeny;
     private int counter;
     
-    public BonusovyObjekt(int sirkaIhriska, int vyskaIhriska) throws IOException {
+    public BonusObject(int sirkaIhriska, int vyskaIhriska) throws IOException {
         super(sirkaIhriska, vyskaIhriska, new Obrazok("/slniecko/1363725493_heart.png", 20, 20));
         this.zobrazeny = false;
         this.counter = 0;

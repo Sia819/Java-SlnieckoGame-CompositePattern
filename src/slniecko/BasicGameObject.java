@@ -3,7 +3,7 @@ package slniecko;
 import java.awt.Graphics2D;
 import java.util.Random;
 
-public class ZakladnyObjekt implements IObjekt {
+public class BasicGameObject implements IObjekt {
 
     private int x;
     private int y;
@@ -18,7 +18,7 @@ public class ZakladnyObjekt implements IObjekt {
      * @param vyskaIhriska
      * @param obrazok
      */
-    public ZakladnyObjekt(int sirkaIhriska, int vyskaIhriska, Obrazok obrazok) {
+    public BasicGameObject(int sirkaIhriska, int vyskaIhriska, Obrazok obrazok) {
         this.sirkaIhriska = sirkaIhriska;
         this.vyskaIhriska = vyskaIhriska;
         this.obrazok = obrazok;

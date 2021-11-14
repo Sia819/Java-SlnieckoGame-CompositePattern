@@ -14,7 +14,7 @@ import javax.swing.UIManager;
  *
  * @author Unlink
  */
-public class Hra extends javax.swing.JFrame {
+public class Game extends javax.swing.JFrame {
 
     private int pocetObjektov;
     private String obrazok;
@@ -27,12 +27,12 @@ public class Hra extends javax.swing.JFrame {
      * @param pocetObjektov
      * @param obrazok
      */
-    public Hra(int pocetObjektov, String obrazok) throws IOException {
+    public Game(int pocetObjektov, String obrazok) throws IOException {
         initComponents();
         this.pocetObjektov = pocetObjektov;
         this.obrazok = obrazok;
         this.skore = 0;
-        HraciaPlocha p = new HraciaPlocha(this, 500, 500);
+        PlayArea p = new PlayArea(this, 500, 500);
         this.contentPanel.add(p);
         this.pack();
         casovac = new Timer(20, p);
@@ -136,7 +136,7 @@ public class Hra extends javax.swing.JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Hra hra = new Hra(pocetObjektovFinal, imgUrlFinal);
+                    Game hra = new Game(pocetObjektovFinal, imgUrlFinal);
                     hra.setVisible(true);
                 } catch (IOException ex) {
                 }

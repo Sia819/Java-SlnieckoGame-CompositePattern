@@ -4,17 +4,17 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ObjektContainer implements IObjekt {
+public class GameObjectContainer implements IObjekt {
 
     private ArrayList<IObjekt> objekty;
     private int body;
 
-    public ObjektContainer() {
+    public GameObjectContainer() {
         this.body = 0;
         this.objekty = new ArrayList<>();
     }
 
-    public ObjektContainer(Hra hra, int sirka, int vyska) throws IOException {
+    public GameObjectContainer(Hra hra, int sirka, int vyska) throws IOException {
         this();
         Obrazok obrazok = new Obrazok(hra.getObrazok() != null ? hra.getObrazok() : "/slniecko/1363649436_gadu.png");
         for (int i = 0; i < hra.getPocetObjektov(); i++) {
