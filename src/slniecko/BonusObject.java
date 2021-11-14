@@ -9,29 +9,33 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 
 /**
- *
  * @author Unlink
  */
-public class BonusObject extends BasicGameObject {
+public class BonusObject extends BasicGameObject
+{
 
     private boolean zobrazeny;
     private int counter;
 
-    public BonusObject(int sirkaIhriska, int vyskaIhriska) throws IOException {
+    public BonusObject(int sirkaIhriska, int vyskaIhriska) throws IOException
+    {
         super(sirkaIhriska, vyskaIhriska, new GameObjectImage("/slniecko/1363725493_heart.png", 20, 20));
         this.zobrazeny = false;
         this.counter = 0;
     }
 
     @Override
-    public int giveBody() {
+    public int giveBody()
+    {
         return 5;
     }
 
     @Override
-    public boolean hit(int x, int y) {
+    public boolean hit(int x, int y)
+    {
         boolean zasah = this.zobrazeny && super.hit(x, y);
-        if (zasah) {
+        if (zasah)
+        {
             this.zobrazeny = false;
             this.counter = 0;
         }
@@ -39,29 +43,34 @@ public class BonusObject extends BasicGameObject {
     }
 
     @Override
-    public void draw(Graphics2D g2) {
-        if (this.zobrazeny) {
+    public void draw(Graphics2D g2)
+    {
+        if (this.zobrazeny)
+        {
             super.draw(g2);
         }
     }
 
     @Override
-    public void move() {
+    public void move()
+    {
         this.counter++;
         //Prv첵ch 10s je off, potom on
-        if (this.counter > 50 * 10) {
+        if (this.counter > 50 * 10)
+        {
             this.zobrazeny = true;
         }
         //Po 15s ho zas vypnem
-        if (this.counter > 50 * 15) {
+        if (this.counter > 50 * 15)
+        {
             this.zobrazeny = false;
             this.counter = 0;
         }
-        if (this.zobrazeny) {
+        if (this.zobrazeny)
+        {
             super.move();
         }
     }
-
 
 
 }

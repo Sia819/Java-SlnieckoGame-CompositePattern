@@ -14,7 +14,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.JComponent;
 
-public class PlayArea extends JComponent implements ActionListener {
+public class PlayArea extends JComponent implements ActionListener
+{
 
     private int width;
     private int height;
@@ -22,7 +23,8 @@ public class PlayArea extends JComponent implements ActionListener {
     private InputHandler input;
     private IObject gameObject;
 
-    public PlayArea(Game hra, int sirka, int vyska) throws IOException {
+    public PlayArea(Game hra, int sirka, int vyska) throws IOException
+    {
         this.game = hra;
         this.width = sirka;
         this.height = vyska;
@@ -50,7 +52,8 @@ public class PlayArea extends JComponent implements ActionListener {
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g)
+    {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -59,13 +62,17 @@ public class PlayArea extends JComponent implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (this.input.isClickAction()) {
+    public void actionPerformed(ActionEvent e)
+    {
+        if (this.input.isClickAction())
+        {
             int[] suradnice = this.input.dajClick();
-            if (this.gameObject.hit(suradnice[0], suradnice[1])) {
+            if (this.gameObject.hit(suradnice[0], suradnice[1]))
+            {
                 System.out.println("Objekt zasiahnut첵");
                 this.game.editScore(this.gameObject.giveBody());
-            } else {
+            } else
+            {
                 this.game.editScore(-1);
             }
         }
@@ -73,16 +80,19 @@ public class PlayArea extends JComponent implements ActionListener {
         this.repaint();
     }
 
-    private void generateBackground(Graphics2D g2) {
+    private void generateBackground(Graphics2D g2)
+    {
         g2.setColor(new Color(5245641));
         g2.fillRect(0, 0, this.width, this.height);
 
         g2.setColor(Color.gray);
-        for (int i = 20; i < this.width; i += 20) {
+        for (int i = 20; i < this.width; i += 20)
+        {
             g2.drawLine(i, 0, i, this.height);
         }
 
-        for (int i = 20; i < this.height; i += 20) {
+        for (int i = 20; i < this.height; i += 20)
+        {
             g2.drawLine(0, i, this.width, i);
         }
     }

@@ -11,7 +11,8 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
-public class Game extends javax.swing.JFrame {
+public class Game extends javax.swing.JFrame
+{
 
     private int objectCount;
     private String imagePath;
@@ -21,10 +22,12 @@ public class Game extends javax.swing.JFrame {
 
     /**
      * Creates new form Hra
+     *
      * @param objectCount
      * @param imagePath
      */
-    public Game(int objectCount, String imagePath) throws IOException {
+    public Game(int objectCount, String imagePath) throws IOException
+    {
         initComponents();
         this.objectCount = objectCount;
         this.imagePath = imagePath;
@@ -36,53 +39,69 @@ public class Game extends javax.swing.JFrame {
         this.startGame();
     }
 
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         int makeObjectCount = 20;
         String imgUrl = null;
-        if (args.length > 0) {
+        if (args.length > 0)
+        {
             makeObjectCount = Integer.parseInt(args[0]);
         }
-        if (args.length > 1) {
+        if (args.length > 1)
+        {
             imgUrl = args[1];
         }
 
-        try {
+        try
+        {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
+        }
+        catch (Exception ex)
+        {
         }
 
         final int makeObjectFinal = makeObjectCount;
         final String imgUrlFinal = imgUrl;
 
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
+        EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                try
+                {
                     Game hra = new Game(makeObjectFinal, imgUrlFinal);
                     hra.setVisible(true);
-                } catch (IOException ex) {
+                }
+                catch (IOException ex)
+                {
                 }
             }
         });
     }
 
-    public void editScore(int score) {
+    public void editScore(int score)
+    {
         this.score += score;
         scoreLabel.setText(this.score + "");
     }
 
-    public void startGame() {
+    public void startGame()
+    {
         timer.start();
     }
 
-    public void pauseGame() {
+    public void pauseGame()
+    {
         timer.stop();
     }
 
-    public int getObjectCount() {
+    public int getObjectCount()
+    {
         return objectCount;
     }
 
-    public String getImagePath() {
+    public String getImagePath()
+    {
         return imagePath;
     }
 
@@ -93,7 +112,8 @@ public class Game extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         scroeTextLabel = new javax.swing.JLabel();
         scoreLabel = new javax.swing.JLabel();

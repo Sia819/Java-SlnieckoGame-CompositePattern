@@ -7,7 +7,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowListener;
 
-public class InputHandler implements MouseListener, WindowListener, MouseMotionListener, WindowFocusListener {
+public class InputHandler implements MouseListener, WindowListener, MouseMotionListener, WindowFocusListener
+{
 
     private boolean isClick;
     private int xclick;
@@ -15,64 +16,110 @@ public class InputHandler implements MouseListener, WindowListener, MouseMotionL
     private boolean isClosed;
     private Game game;
 
-    public InputHandler(Game game) {
+    public InputHandler(Game game)
+    {
         this.game = game;
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e)
+    {
         this.xclick = e.getX();
         this.yclick = e.getY();
         this.isClick = true;
     }
+
     @Override
-    public void mouseClicked(MouseEvent e) { }
+    public void mouseClicked(MouseEvent e)
+    {
+    }
+
     @Override
-    public void mouseReleased(MouseEvent e) { }
+    public void mouseReleased(MouseEvent e)
+    {
+    }
+
     @Override
-    public void mouseEntered(MouseEvent e) { }
+    public void mouseEntered(MouseEvent e)
+    {
+    }
+
     @Override
-    public void mouseExited(MouseEvent e) { }
-    public synchronized boolean isClickAction() {
+    public void mouseExited(MouseEvent e)
+    {
+    }
+
+    public synchronized boolean isClickAction()
+    {
         return this.isClick;
     }
 
-    public final synchronized int[] dajClick() {
+    public final synchronized int[] dajClick()
+    {
         this.isClick = false;
         return new int[]{xclick, yclick};
     }
 
-    public synchronized boolean isClosed() {
+    public synchronized boolean isClosed()
+    {
         return this.isClosed;
     }
 
     @Override
-    public void windowClosing(WindowEvent e) {
+    public void windowClosing(WindowEvent e)
+    {
         this.isClosed = true;
     }
 
     @Override
-    public void windowOpened(WindowEvent e) { }
+    public void windowOpened(WindowEvent e)
+    {
+    }
+
     @Override
-    public void windowClosed(WindowEvent e) { }
+    public void windowClosed(WindowEvent e)
+    {
+    }
+
     @Override
-    public void windowIconified(WindowEvent e) { }
+    public void windowIconified(WindowEvent e)
+    {
+    }
+
     @Override
-    public void windowDeiconified(WindowEvent e) { }
+    public void windowDeiconified(WindowEvent e)
+    {
+    }
+
     @Override
-    public void windowActivated(WindowEvent e) { }
+    public void windowActivated(WindowEvent e)
+    {
+    }
+
     @Override
-    public void windowDeactivated(WindowEvent e) { }
+    public void windowDeactivated(WindowEvent e)
+    {
+    }
+
     @Override
-    public void mouseDragged(MouseEvent e) { }
+    public void mouseDragged(MouseEvent e)
+    {
+    }
+
     @Override
-    public void mouseMoved(MouseEvent e) { }
+    public void mouseMoved(MouseEvent e)
+    {
+    }
+
     @Override
-    public void windowGainedFocus(WindowEvent e) {
+    public void windowGainedFocus(WindowEvent e)
+    {
         this.game.startGame();
     }
+
     @Override
-    public void windowLostFocus(WindowEvent e) {
+    public void windowLostFocus(WindowEvent e)
+    {
         this.game.pauseGame();
     }
 }

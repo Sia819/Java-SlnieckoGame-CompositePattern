@@ -4,50 +4,62 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GameObjectContainer implements IObject {
+public class GameObjectContainer implements IObject
+{
 
     private ArrayList<IObject> gameObject;
     private int body;
 
-    public GameObjectContainer() {
+    public GameObjectContainer()
+    {
         this.body = 0;
         this.gameObject = new ArrayList<>();
     }
 
-    public GameObjectContainer(Game hra, int sirka, int vyska) throws IOException {
+    public GameObjectContainer(Game hra, int sirka, int vyska) throws IOException
+    {
         this();
         GameObjectImage image = new GameObjectImage(
                 hra.getImagePath() != null
                         ? hra.getImagePath() : "/slniecko/1363649436_gadu.png");
-        for (int i = 0; i < hra.getObjectCount(); i++) {
+        for (int i = 0; i < hra.getObjectCount(); i++)
+        {
             this.addObject(new BasicGameObject(sirka, vyska, image));
         }
     }
 
-    public void addObject(IObject objekt) {
+    public void addObject(IObject objekt)
+    {
         this.gameObject.add(objekt);
     }
 
     @Override
-    public void move() {
+    public void move()
+    {
         this.body = 0;
-        for (IObject o : this.gameObject) {
+        for (IObject o : this.gameObject)
+        {
             o.move();
         }
     }
 
     @Override
-    public void draw(Graphics2D g2) {
-        for (IObject o : this.gameObject) {
+    public void draw(Graphics2D g2)
+    {
+        for (IObject o : this.gameObject)
+        {
             o.draw(g2);
         }
     }
 
     @Override
-    public boolean hit(int x, int y) {
+    public boolean hit(int x, int y)
+    {
         boolean isHited = false;
-        for (IObject o : this.gameObject) {
-            if (o.hit(x, y)) {
+        for (IObject o : this.gameObject)
+        {
+            if (o.hit(x, y))
+            {
                 this.body += 1;
                 isHited = true;
             }
@@ -56,7 +68,8 @@ public class GameObjectContainer implements IObject {
     }
 
     @Override
-    public int giveBody() {
+    public int giveBody()
+    {
         return body > 0 ? body : 1;
     }
 }
