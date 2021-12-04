@@ -8,3 +8,4 @@ nbdist/
 # Intellij
 .idea/
 *.iml
+out/

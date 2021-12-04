@@ -18,17 +18,17 @@ import javax.imageio.ImageIO;
  */
 public class GameObjectImage
 {
-
     private BufferedImage bitmap;
 
     public GameObjectImage(String imagePath) throws IOException
     {
         try
         {
-            if (imagePath.startsWith("/"))
+            if (imagePath.startsWith("/")) // 파일 Path 를 전달 받는 경우
             {
                 this.bitmap = ImageIO.read(getClass().getResource(imagePath));
-            } else
+            }
+            else // File 이름만 전달받는 경우
             {
                 this.bitmap = ImageIO.read(new URL(imagePath));
             }
@@ -39,16 +39,22 @@ public class GameObjectImage
         }
     }
 
-    public GameObjectImage(String imagePath, int width, int height) throws IOException
+    public void setDrawSize(int width, int height)
     {
-        this(imagePath);
-        BufferedImage dimg = new BufferedImage(width, height, this.bitmap.getType());
-        Graphics2D g = dimg.createGraphics();
+        BufferedImage myimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = myimg.createGraphics();
+
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g.drawImage(this.bitmap, 0, 0, width, height, 0, 0, this.bitmap.getWidth(), this.bitmap.getHeight(), null);
+        g.drawImage(this.bitmap, 0, 0, width, height, null);
         g.dispose();
-        this.bitmap = dimg;
+        this.bitmap = myimg;
+    }
+
+    private BufferedImage cropImage(BufferedImage src, int width, int height)
+    {
+        BufferedImage dest = src.getSubimage(0, 0, width, height);
+        return dest;
     }
 
     public void draw(Graphics2D g2, int x, int y)
@@ -64,5 +70,10 @@ public class GameObjectImage
     public int getHeight()
     {
         return this.bitmap.getHeight();
+    }
+
+    public BufferedImage getImage()
+    {
+        return this.bitmap;
     }
 }

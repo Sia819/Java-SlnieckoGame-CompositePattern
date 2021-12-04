@@ -5,7 +5,7 @@
  */
 package slniecko;
 
-import java.awt.EventQueue;
+import java.awt.*;
 import java.io.IOException;
 import javax.swing.Timer;
 import javax.swing.UIManager;
@@ -32,12 +32,29 @@ public class Game extends javax.swing.JFrame
         this.objectCount = objectCount;
         this.imagePath = imagePath;
         this.score = 0;
+        createGameObjectImage();
         PlayArea playArea = new PlayArea(this, 500, 500);
         this.contentPanel.add(playArea);
         this.pack();
         timer = new Timer(20, playArea);
         this.startGame();
     }
+
+    public void createGameObjectImage()
+    {
+        GameObjectImageFactory factory = GameObjectImageFactory.getInstance();
+
+        factory.getGameImage("/slniecko/_sun.png");
+
+        GameObjectImage heartImage =  factory.getGameImage("/slniecko/_heart.png");
+        if (heartImage != null)
+        {
+            heartImage.setDrawSize(20, 20);
+        }
+
+        factory.getGameImage("/slniecko/_target.png");
+    }
+
 
     public static void main(String args[])
     {

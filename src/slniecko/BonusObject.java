@@ -17,9 +17,11 @@ public class BonusObject extends BasicGameObject
     private boolean zobrazeny;
     private int counter;
 
-    public BonusObject(int sirkaIhriska, int vyskaIhriska) throws IOException
+    public BonusObject(int areaWidth, int areaHeight) throws IOException
     {
-        super(sirkaIhriska, vyskaIhriska, new GameObjectImage("/slniecko/1363725493_heart.png", 20, 20));
+        super(areaWidth, areaHeight,
+                GameObjectImageFactory.getInstance().getGameImage("_heart"));
+
         this.zobrazeny = false;
         this.counter = 0;
     }

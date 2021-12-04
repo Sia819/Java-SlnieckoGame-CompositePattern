@@ -37,15 +37,16 @@ public class PlayArea extends JComponent implements ActionListener
         hra.addWindowFocusListener(input);
 
         GameObjectContainer gameContainer = new GameObjectContainer();
-        gameContainer.addObject(new GameObjectContainer(hra, sirka, vyska));
-        gameContainer.addObject(new BonusObject(sirka, vyska));
+        gameContainer.addObject(new GameObjectContainer(hra, sirka, vyska)); // 20개 태양 생성
+        gameContainer.addObject(new BonusObject(sirka, vyska)); // 1개 보너스 생성
         this.gameObject = gameContainer;
 
         this.setPreferredSize(new Dimension(this.width, this.height));
         this.setMinimumSize(new Dimension(this.width, this.height));
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage(getClass().getResource("/slniecko/1363733258_target.png"));
+        GameObjectImageFactory factory = GameObjectImageFactory.getInstance(); // 타겟 이미지를 생성.
+        Image image = factory.getGameImage("_target").getImage();
         Point hotSpot = new Point(16, 16);
         Cursor cursor = toolkit.createCustomCursor(image, hotSpot, "Target");
         this.setCursor(cursor);

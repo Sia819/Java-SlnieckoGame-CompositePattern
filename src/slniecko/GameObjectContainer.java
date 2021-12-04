@@ -16,13 +16,12 @@ public class GameObjectContainer implements IObject
         this.gameObject = new ArrayList<>();
     }
 
-    public GameObjectContainer(Game hra, int sirka, int vyska) throws IOException
+    public GameObjectContainer(Game game, int sirka, int vyska) throws IOException
     {
         this();
-        GameObjectImage image = new GameObjectImage(
-                hra.getImagePath() != null
-                        ? hra.getImagePath() : "/slniecko/1363649436_gadu.png");
-        for (int i = 0; i < hra.getObjectCount(); i++)
+        GameObjectImageFactory factory = GameObjectImageFactory.getInstance();
+        GameObjectImage image = factory.getGameImage("_sun");
+        for (int i = 0; i < game.getObjectCount(); i++)
         {
             this.addObject(new BasicGameObject(sirka, vyska, image));
         }
